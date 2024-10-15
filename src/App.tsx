@@ -2,35 +2,17 @@ import React, { useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
 
 function App() {
-  const [city, setCity] = useState("ME58RT");
+  // const [city, setCity] = useState("ME58RT");
 
-  const { data, error, isLoading } = usePostcodeWeather(city);
+  // const { data, error, isLoading } = usePostcodeWeather(city);
 
-  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCity(e.target.value);
-  };
+  // const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setCity(e.target.value);
+  // };
 
   return (
-    <div className="App">
-      <h1>Weather App</h1>
-      <input
-        type="text"
-        value={city}
-        onChange={handleCityChange}
-        placeholder="Enter city name"
-      />
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Error fetching weather data</p>
-      ) : data ? (
-        <div>
-          <h2>Name: {data.location.name}</h2>
-          <h2>Cloud: {data.current.cloud}</h2>
-        </div>
-      ) : (
-        <p>No data</p>
-      )}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <h1 className="text-3xl font-bold text-blue-500">Tailwind works!</h1>
     </div>
   );
 }
