@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ title, children, className }) => {
   const cardClasses = classNames(
-    "bg-gray-800 text-gray-400 font-bold rounded-lg shadow-lg p-6 w-full",
+    "bg-gray-800 text-gray-400 font-bold rounded-lg shadow-lg p-6",
     className
   );
 
