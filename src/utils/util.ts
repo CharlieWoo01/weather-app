@@ -14,17 +14,24 @@ interface Condition {
 }
 
 export const extractHourlyTimes = (forecastData: any): HourlyData[] => {
-  const forecastDay = forecastData[0].forecast.forecastday[0];
-  const hourlyData = forecastDay.hour.map((hour: any) => {
-    const date = new Date(hour.time);
-    const timeOnly = format(date, "HH:mm");
+  const forecastDay = forecastData?.forecast?.forecastday?.[0] ?? null;
 
-    return {
-      time: timeOnly,
-      temp_c: hour.temp_c,
-      is_day: hour.is_day,
-      condition: hour.condition,
-    };
-  });
+  if (!forecastDay) {
+    return [];
+  }
+
+  const hourlyData =
+    forecastDay.hour?.map((hour: any) => {
+      const date = new Date(hour?.time ?? "");
+      const timeOnly = format(date, "HH:mm");
+
+      return {
+        time: timeOnly,
+        temp_c: hour?.temp_c ?? 0,
+        is_day: hour?.is_day ?? 1,
+        condition: hour?.condition ?? { text: "", icon: "" },
+      };
+    }) ?? [];
+
   return hourlyData;
 };
