@@ -58,6 +58,3 @@ export default tseslint.config({
   },
 })
 ```
-
-
-3f0b04c03a9f4ec0920181448241510
