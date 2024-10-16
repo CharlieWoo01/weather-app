@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
 
 import classNames from "classnames";
-import { Card } from "./components";
+import { Card, Search } from "./components";
 
 function App() {
   const [city, setCity] = useState("London");
@@ -25,14 +25,16 @@ function App() {
   const paginatedHourlyTimes = hourlyTimes.slice(startIndex, pageSize);
 
   return (
-    <div>
-      <input
-        type="text"
-        value={city}
-        onChange={handleCityChange}
-        placeholder="Enter city name"
-      />
-      <div className="flex justify-center items-center min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center">
+      <div className="w-full flex justify-center py-4">
+        <Search
+          onChange={handleCityChange}
+          value={city}
+          placeholder="Search for cities"
+          className="w-1/2"
+        />
+      </div>
+      <div className="w-full flex justify-center items-center flex-grow">
         <Card title="Today's Forecast" className="w-1/2">
           {isLoadingWeather ? (
             <p className="text-gray-300">Loading...</p>
