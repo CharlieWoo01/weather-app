@@ -3,6 +3,7 @@ import { usePostcodeWeather } from "./hooks/useWeather";
 import Card from "./components/Card/Card";
 import { extractHourlyTimes } from "./utils/util";
 import classNames from "classnames";
+import { Card } from "./components";
 
 function App() {
   const [city, setCity] = useState("London");

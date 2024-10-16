@@ -7,7 +7,7 @@ interface CardProps {
   className?: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, children, className }) => {
+export default function Card({ title, children, className }: CardProps) {
   const cardClasses = classNames(
     "bg-gray-800 text-gray-400 font-bold rounded-lg shadow-lg p-6",
     className
@@ -19,6 +19,4 @@ const Card: React.FC<CardProps> = ({ title, children, className }) => {
       <div>{children}</div>
     </div>
   );
-};
-
-export default Card;
+}
