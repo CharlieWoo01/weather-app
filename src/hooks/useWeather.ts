@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getWeatherByPostcode, Hour } from "../service/weatherService";
 import { format } from "date-fns";
+import { WeatherService } from "../service/weatherService";
 
 export const usePostcodeWeather = (postcode: string, options = {}) => {
   return useQuery({
     ...options,
     queryKey: ["postcode", postcode],
-    queryFn: () => getWeatherByPostcode(postcode),
+    queryFn: () => WeatherService.getWeatherByPostcode(postcode),
     select: (data) => {
       const forecastDay = data?.forecast?.forecastday?.[0] ?? null;
 
@@ -16,7 +16,7 @@ export const usePostcodeWeather = (postcode: string, options = {}) => {
       }
 
       const modifiedHourlyData =
-        forecastDay.hour?.map((hour: Hour) => {
+        forecastDay.hour?.map((hour: WeatherService.Hour) => {
           const date = new Date(hour?.time ?? "");
           const timeOnly = format(date, "HH:mm");
 
