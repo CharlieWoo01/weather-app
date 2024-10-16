@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
-import Card from "./components/Card/Card";
-import { extractHourlyTimes } from "./utils/util";
+
 import classNames from "classnames";
 import { Card } from "./components";
 
 function App() {
   const [city, setCity] = useState("London");
 
-  const { data, isLoading } = usePostcodeWeather(city);
+  const { data: weatherData, isLoading: isLoadingWeather } =
+    usePostcodeWeather(city);
 
   const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
 
-  // Ensure that `data` exists before attempting to extract hourly times
-  const hourlyTimes = data ? extractHourlyTimes(data) : [];
+  // Ensure that data exists before attempting to extract hourly times
+  const hourlyTimes = weatherData?.forecast?.forecastday?.[0]?.hour ?? [];
 
   // TODO: Move this into a util somewhere maybe?
   // TODO: Use i18n if got time
@@ -34,7 +34,7 @@ function App() {
       />
       <div className="flex justify-center items-center min-h-screen bg-gray-900">
         <Card title="Today's Forecast" className="w-1/2">
-          {isLoading ? (
+          {isLoadingWeather ? (
             <p className="text-gray-300">Loading...</p>
           ) : paginatedHourlyTimes.length > 0 ? (
             <div className="grid grid-cols-6 gap-2">
@@ -52,7 +52,9 @@ function App() {
                     alt={`${weather.condition.text} icon`}
                     className="w-16 h-16"
                   />
-                  <p className="text-xl text-gray-300 mt-2">{weather.temp_c}°</p>
+                  <p className="text-xl text-gray-300 mt-2">
+                    {weather.temp_c}°
+                  </p>
                 </div>
               ))}
             </div>
