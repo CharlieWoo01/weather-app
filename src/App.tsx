@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
 
 import classNames from "classnames";
-import { Card, Search } from "./components";
+import { Card, Search, WeatherToday } from "./components";
 
 function App() {
   const [city, setCity] = useState("London");
@@ -24,18 +24,29 @@ function App() {
   const startIndex = (page - 1) * pageSize;
   const paginatedHourlyTimes = hourlyTimes.slice(startIndex, pageSize);
 
+  const currentWeather = weatherData?.current;
+  const location = weatherData?.location;
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center">
-      <div className="w-full flex justify-center py-4">
+      <div className="w-full flex justify-center py-4 fixed top-0 bg-gray-900 z-10">
         <Search
           onChange={handleCityChange}
           value={city}
           placeholder="Search for cities"
-          className="w-1/2"
+          className="w-full max-w-2xl"
         />
       </div>
-      <div className="w-full flex justify-center items-center flex-grow">
-        <Card title="Today's Forecast" className="w-1/2">
+
+      <WeatherToday
+        cloud={currentWeather?.cloud}
+        temperature={currentWeather?.temp_c}
+        weatherImage={currentWeather?.condition.icon}
+        weatherAlt={currentWeather?.condition.text}
+        city={location?.name}
+      />
+      <div className="w-full flex justify-center items-center mt-4">
+        <Card title="Today's Forecast" className="w-full max-w-2xl text-center">
           {isLoadingWeather ? (
             <p className="text-gray-300">Loading...</p>
           ) : paginatedHourlyTimes.length > 0 ? (
