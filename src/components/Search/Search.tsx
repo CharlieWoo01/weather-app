@@ -1,14 +1,21 @@
 import classNames from "classnames";
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 interface SearchProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
   value: string;
   placeholder: string;
   className?: string;
 }
 
-export default function Search({ onChange, value, placeholder, className }: SearchProps) {
+export default function Search({
+  onChange,
+  onKeyDown,
+  value,
+  placeholder,
+  className,
+}: SearchProps) {
   return (
     <div
       className={classNames(
@@ -35,6 +42,7 @@ export default function Search({ onChange, value, placeholder, className }: Sear
         placeholder={placeholder}
         className="bg-transparent w-full text-gray-400 placeholder-gray-400 focus:outline-none px-3"
         onChange={onChange}
+        onKeyDown={onKeyDown}
         value={value}
       />
     </div>

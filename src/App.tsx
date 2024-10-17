@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
-
 import classNames from "classnames";
 import { Card, Navigation, Search, WeatherToday } from "./components";
 
 function App() {
   const [city, setCity] = useState("London");
+  const [searchTerm, setSearchTerm] = useState("London");
 
+  // Fetch weather data based on the searchTerm, not city
   const { data: weatherData, isLoading: isLoadingWeather } =
-    usePostcodeWeather(city);
+    usePostcodeWeather(searchTerm);
 
-  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Update the city input as the user types
+  const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
+  };
+
+  // Only trigger search when Enter key is pressed
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSearchTerm(city);
+    }
   };
 
   // Ensure that data exists before attempting to extract hourly times
   const hourlyTimes = weatherData?.forecast?.forecastday?.[0]?.hour ?? [];
 
-  // TODO: Move this into a util somewhere maybe?
-  // TODO: Use i18n if got time
   const page = 1;
   const pageSize = 6;
   const startIndex = (page - 1) * pageSize;
@@ -37,13 +44,14 @@ function App() {
         <div className="w-full flex justify-center py-4 fixed top-0 z-10 ml-20">
           <Search
             onChange={handleCityChange}
+            onKeyDown={handleKeyDown}
             value={city}
             placeholder="Search for cities"
             className="w-full max-w-2xl"
           />
         </div>
 
-        <div className=" w-full flex justify-center">
+        <div className="w-full flex justify-center">
           <WeatherToday
             cloud={currentWeather?.cloud}
             temperature={currentWeather?.temp_c}
@@ -52,6 +60,7 @@ function App() {
             city={location?.name}
           />
         </div>
+
         <div className="w-full flex justify-center items-center mt-4">
           <Card
             title="Today's Forecast"
