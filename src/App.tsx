@@ -2,6 +2,7 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
 import classNames from "classnames";
 import { Card, Navigation, Search, WeatherToday } from "./components";
+import { MobileNavigation } from "./components/Navigation/MobileNavigation";
 
 function App() {
   const [city, setCity] = useState("London");
@@ -35,13 +36,16 @@ function App() {
   const location = weatherData?.location;
 
   return (
-    <div className="min-h-screen bg-gray-900 flex">
-      <div className="fixed top-0 left-0 h-[calc(100vh)] ml-8 flex flex-col justify-between py-3">
+    <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row">
+      {/* Desktop Navigation/medium screens and up) */}
+      <div className="hidden md:flex md:flex-col md:w-20 md:h-screen md:bg-gray-800 md:fixed md:top-0 md:left-0 md:py-5">
         <Navigation />
       </div>
 
-      <div className="flex flex-col items-center ml-20 w-full">
-        <div className="w-full flex justify-center py-4 fixed top-0 z-10 ml-20">
+      {/* Main content area */}
+      <div className="flex flex-col items-center w-full flex-grow md:ml-20 mb-16 md:mb-0">
+        {/* Search Bar */}
+        <div className="w-11/12 flex justify-center py-4">
           <Search
             onChange={handleCityChange}
             onKeyDown={handleKeyDown}
@@ -51,7 +55,8 @@ function App() {
           />
         </div>
 
-        <div className="w-full flex justify-center">
+        {/* Weather Today Component */}
+        <div className="w-full flex justify-center items-center my-4">
           <WeatherToday
             cloud={currentWeather?.cloud}
             temperature={currentWeather?.temp_c}
@@ -61,7 +66,8 @@ function App() {
           />
         </div>
 
-        <div className="w-full flex justify-center items-center mt-4">
+        {/* Today's Forecast Card */}
+        <div className="w-full flex justify-center items-center my-4">
           <Card
             title="Today's Forecast"
             className="w-full max-w-2xl text-center"
@@ -95,6 +101,11 @@ function App() {
             )}
           </Card>
         </div>
+      </div>
+
+      {/* Mobile Navigation (visible on small screens) */}
+      <div className="fixed bottom-0 left-0 w-full md:hidden">
+        <MobileNavigation />
       </div>
     </div>
   );
