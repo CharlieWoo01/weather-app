@@ -26,3 +26,9 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
+
+      - name: Check Environment Variables
+        run: |
+          echo "VITE_WEATHER_API_BASE_URL=${{ secrets.VITE_WEATHER_API_BASE_URL }}"
+          echo "VITE_WEATHER_API_KEY=${{ secrets.VITE_WEATHER_API_KEY }}"
+
