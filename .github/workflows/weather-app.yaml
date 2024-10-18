@@ -34,4 +34,4 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-          clean: true  # This will ensure that it forces a clean deployment
+          allow_empty_commit: true  # Force an empty commit if nothing changed
