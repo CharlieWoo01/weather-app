@@ -73,7 +73,7 @@ function App() {
             className="w-full max-w-2xl text-center"
           >
             {isLoadingWeather ? (
-              <p className="text-gray-300">Loading...</p>
+              <p className="text-gray-300">Loading..</p>
             ) : paginatedHourlyTimes.length > 0 ? (
               <div className="grid grid-cols-6 gap-2">
                 {paginatedHourlyTimes.map((weather, index) => (
