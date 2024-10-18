@@ -1,9 +1,7 @@
 name: Deploy Vite App to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main  # Change this to your main branch name if necessary
+  workflow_dispatch:
 
 jobs:
   build:
@@ -23,6 +21,9 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Check for build directory
+        run: ls -la ./dist
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
