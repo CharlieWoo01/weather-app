@@ -16,7 +16,15 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
       - name: Install and Build 🔧
+        env:
+          VITE_WEATHER_API_BASE_URL: ${{ secrets.VITE_WEATHER_API_BASE_URL }}
+          VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
         run: |
           npm ci
           npm run build
@@ -26,9 +34,3 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-
-      - name: Check Environment Variables
-        run: |
-          echo "VITE_WEATHER_API_BASE_URL=${{ secrets.VITE_WEATHER_API_BASE_URL }}"
-          echo "VITE_WEATHER_API_KEY=${{ secrets.VITE_WEATHER_API_KEY }}"
-
