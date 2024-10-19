@@ -24,25 +24,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Run tests and generate coverage
       - name: Run tests with coverage
         run: npm run test:coverage
 
+      # Upload the entire coverage directory as an artifact
       - name: Upload coverage directory as artifact
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
           path: ./coverage/
 
-      - name: Install Coveralls
-        run: npm install coveralls
-
+      # Upload lcov.info to Coveralls
       - name: Upload coverage to Coveralls
-        run: |
-          if [ -f ./coverage/lcov.info ]; then
-            cat ./coverage/lcov.info | coveralls;
-          else
-            echo "lcov.info not found!";
-            exit 1;
-          fi
+        run: npm run coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
