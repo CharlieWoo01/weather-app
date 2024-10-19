@@ -1,6 +1,6 @@
 # weather-app
 
-![Code Coverage](https://coveralls.io/repos/github/CharlieWoo01/weather-app/badge.svg?branch=main)
+![Code Coverage](https://coveralls.io/repos/github/CharlieWoo01/weather-app/badge.svg?branch=main&cacheBust=1)
 
 
 I ran the following command to create the boilerplate vite React app with ts config:
