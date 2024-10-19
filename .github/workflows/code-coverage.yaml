@@ -27,13 +27,8 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Upload coverage to Coveralls
-        run: |
-          if [ -f ./coverage/lcov.info ]; then
-            cat ./coverage/lcov.info | coveralls;
-          else
-            echo "lcov.info not found!";
-            exit 1;
-          fi
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: ./coverage
