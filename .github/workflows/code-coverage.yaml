@@ -42,7 +42,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: coverage-report
-          path: ./coverage
+          path: ./coverage/
+
+      - name: List coverage directory
+        run: ls -l ./coverage
 
       - name: Upload coverage to Coveralls
         run: |
