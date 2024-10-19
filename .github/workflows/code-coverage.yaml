@@ -28,6 +28,12 @@ jobs:
         run: npm run test:coverage
 
       - name: Upload coverage to Coveralls
-        run: cat ./coverage/lcov.info | coveralls
+        run: |
+          if [ -f ./coverage/lcov.info ]; then
+            cat ./coverage/lcov.info | coveralls;
+          else
+            echo "lcov.info not found!";
+            exit 1;
+          fi
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
