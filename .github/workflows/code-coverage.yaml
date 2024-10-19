@@ -1,4 +1,4 @@
-name: Run Code Coverage
+name: Generate Code Coverage
 
 on:
   push:
@@ -27,12 +27,7 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Generate coverage badge
-        run: |
-          npx coverage-badge --input ./coverage/lcov.info --output ./coverage/badge.svg
-
-      - name: Upload coverage report and badge
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage/
+      - name: Upload coverage to Coveralls
+        run: npm run coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
