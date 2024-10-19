@@ -21,6 +21,8 @@ export default defineConfig({
         "dist/",
         "**/*.test.{ts,tsx}",
         "src/**/*.d.ts",
+        "**/index.ts",
+        "src/main.tsx",
       ],
     },
   },
