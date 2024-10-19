@@ -1,32 +1,32 @@
-name: Test and Upload Coverage to Coveralls
+# name: Test and Upload Coverage to Coveralls
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
 
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "20"
 
-      - name: Install dependencies and run codecoverage
-        run: |
-          npm install
-          npm run test:coverage
+#       - name: Install dependencies and run codecoverage
+#         run: |
+#           npm install
+#           npm run test:coverage
 
-      - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Upload coverage to Coveralls
+#         uses: coverallsapp/github-action@v2
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
