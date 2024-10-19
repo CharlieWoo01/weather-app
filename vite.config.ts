@@ -9,7 +9,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./setupTests.ts",
     coverage: {
-      reporter: ["text", "html"],
+      reporter: ["text", "lcov"],
       reportsDirectory: "./coverage",
     },
   },
