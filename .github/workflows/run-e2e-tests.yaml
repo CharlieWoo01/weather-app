@@ -20,16 +20,18 @@ jobs:
 
       - name: Start Vite application
         run: |
-          npm run dev & sleep 5
+          npm run dev &
         env:
           VITE_WEATHER_API_BASE_URL: ${{ secrets.VITE_WEATHER_API_BASE_URL }}
           VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
+
+      - name: Wait for Vite to be ready
+        run: npx wait-on http://localhost:3000
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          headless: true
         env:
           CYPRESS_baseUrl: http://localhost:3000
           VITE_WEATHER_API_BASE_URL: ${{ secrets.VITE_WEATHER_API_BASE_URL }}
