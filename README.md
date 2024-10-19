@@ -1,5 +1,8 @@
 # weather-app
 
+![Code Coverage](./coverage/badge.svg)
+
+
 I ran the following command to create the boilerplate vite React app with ts config:
 
 ```bash
