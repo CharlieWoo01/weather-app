@@ -16,25 +16,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Debugging: Print the current directory and list its contents
+      - name: Print working directory
+        run: pwd
+
+      - name: List files in current directory
+        run: ls -l
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20"
 
+      # Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: ./weather-app  # Adjust to point to your actual project directory
+        working-directory: ./weather-app  # Adjust this to the correct path of your package.json
 
+      # Run tests with coverage
       - name: Run tests with coverage
         run: npm run test:coverage
-        working-directory: ./weather-app  # Adjust to point to your actual project directory
+        working-directory: ./weather-app  # Adjust this to the correct path of your package.json
 
       # Upload the entire coverage directory as an artifact
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: ./weather-app/coverage/  # Adjust to point to your actual coverage directory
+          path: ./weather-app/coverage/  # Adjust this to the correct path of your coverage directory
 
   upload-to-coveralls:
     runs-on: ubuntu-latest
@@ -45,7 +54,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: coverage-report
-          path: ./weather-app/coverage/  # Adjust to point to your actual coverage directory
+          path: ./weather-app/coverage/  # Adjust this to the correct path of your coverage directory
 
       # List the contents of the coverage directory for debugging
       - name: List coverage directory
@@ -54,6 +63,6 @@ jobs:
       # Run the coveralls script from package.json
       - name: Upload coverage to Coveralls
         run: npm run coveralls
-        working-directory: ./weather-app  # Adjust to point to your actual project directory
+        working-directory: ./weather-app  # Adjust this to the correct path of your package.json
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
