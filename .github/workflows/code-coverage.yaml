@@ -1,4 +1,4 @@
-name: Generate Code Coverage and Upload to Coveralls
+name: Test and Upload Coverage to Coveralls
 
 on:
   push:
@@ -9,34 +9,27 @@ on:
       - main
 
 jobs:
-  test:
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # Checkout the code
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # Setup Node.js version
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: '16.x'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies and run tests
+        run: |
+          npm install
+          npm run test:coverage
 
-      # Run tests and generate coverage
-      - name: Run tests with coverage
-        run: npm run test:coverage
-
-      # Upload the entire coverage directory as an artifact
-      - name: Upload coverage directory as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: ./coverage/
-
-      # Upload lcov.info to Coveralls
+      # Upload coverage to Coveralls
       - name: Upload coverage to Coveralls
-        run: npm run coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
