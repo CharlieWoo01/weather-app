@@ -84,14 +84,19 @@ function App() {
                       "border-r-2 border-gray-700":
                         index !== paginatedHourlyTimes.length - 1,
                     })}
+                    data-testid={`forecast-item-${index}`}
                   >
-                    <p>{weather.time}</p>
+                    <p data-testid={`forecast-time-${index}`}>{weather.time}</p>
                     <img
                       src={weather.condition.icon}
                       alt={`${weather.condition.text} icon`}
                       className="w-16 h-16"
+                      data-testid={`forecast-icon-${index}`}
                     />
-                    <p className="text-xl text-gray-300 mt-2">
+                    <p
+                      className="text-xl text-gray-300 mt-2"
+                      data-testid={`forecast-temperature-${index}`}
+                    >
                       {weather.temp_c}°
                     </p>
                   </div>
