@@ -44,8 +44,12 @@ jobs:
           name: coverage-report
           path: ./coverage/
 
+      # List the contents of the coverage directory for debugging
       - name: List coverage directory
         run: ls -l ./coverage
+
+      - name: Install Coveralls
+        run: npm install --global coveralls
 
       - name: Upload coverage to Coveralls
         run: |
