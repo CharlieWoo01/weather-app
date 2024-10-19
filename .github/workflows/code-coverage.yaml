@@ -34,7 +34,7 @@ jobs:
           path: ./coverage/
 
       - name: Install Coveralls
-        run: npm install -g coveralls
+        run: npm install coveralls
 
       - name: Upload coverage to Coveralls
         run: |
