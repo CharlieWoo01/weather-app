@@ -11,6 +11,17 @@ export default defineConfig({
     coverage: {
       reporter: ["text", "lcov"],
       reportsDirectory: "./coverage",
+      exclude: [
+        "node_modules/",
+        "postcss.config.cjs",
+        "tailwind.config.js",
+        "vite.config.ts",
+        "eslint.config.js",
+        "src/mocks/",
+        "dist/",
+        "**/*.test.{ts,tsx}",
+        "src/**/*.d.ts",
+      ],
     },
   },
 });
