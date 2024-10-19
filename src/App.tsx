@@ -1,8 +1,9 @@
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { usePostcodeWeather } from "./hooks/useWeather";
 import classNames from "classnames";
-import { Card, Navigation, Search, WeatherToday } from "./components";
+import { Card, Search, WeatherToday } from "./components";
 import { MobileNavigation } from "./components/Navigation/MobileNavigation";
+import { DesktopNavigation } from "./components/Navigation/DesktopMenu";
 
 function App() {
   const [city, setCity] = useState("London");
@@ -39,7 +40,7 @@ function App() {
     <div className="min-h-screen bg-gray-900 flex flex-col md:flex-row">
       {/* Desktop Navigation/medium screens and up) */}
       <div className="hidden md:flex md:flex-col md:w-20 md:h-screen md:bg-gray-800 md:fixed md:top-0 md:left-0 md:py-5">
-        <Navigation />
+        <DesktopNavigation />
       </div>
 
       {/* Main content area */}
