@@ -3,11 +3,12 @@ import { format } from "date-fns";
 import { WeatherService } from "../service/weatherService";
 
 export const usePostcodeWeather = (postcode: string, options = {}) => {
+  const formatPostcode = postcode.toLocaleLowerCase();
   return useQuery({
     ...options,
-    queryKey: ["postcode", postcode],
+    queryKey: ["postcode", formatPostcode],
     staleTime: 10 * 60 * 1000, // 10 minutes cache
-    queryFn: () => WeatherService.getWeatherByPostcode(postcode),
+    queryFn: () => WeatherService.getWeatherByPostcode(formatPostcode),
     select: (data) => {
       const forecastDay = data?.forecast?.forecastday?.[0] ?? null;
 
