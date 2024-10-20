@@ -6,6 +6,7 @@ export const usePostcodeWeather = (postcode: string, options = {}) => {
   return useQuery({
     ...options,
     queryKey: ["postcode", postcode],
+    staleTime: 10 * 60 * 1000, // 10 minutes cache
     queryFn: () => WeatherService.getWeatherByPostcode(postcode),
     select: (data) => {
       const forecastDay = data?.forecast?.forecastday?.[0] ?? null;
