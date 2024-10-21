@@ -11,9 +11,7 @@ export default function RadioGroup({
   values,
   onChange,
 }: RadioGroupProps) {
-    console.log(values);
-
-  return (    
+  return (
     <div className="space-y-4">
       {options.map((option, index) => (
         <RadioSlider
