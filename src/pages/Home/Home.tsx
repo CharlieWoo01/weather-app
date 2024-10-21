@@ -8,8 +8,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("London");
 
   // Fetch weather data based on the searchTerm, not city
-  const { data: weatherData, isLoading: isLoadingWeather } =
-    usePostcodeWeather(searchTerm);
+  const { data: weatherData, isSuccess } = usePostcodeWeather(searchTerm);
 
   // Update the city input as the user types
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,22 +47,22 @@ export default function Home() {
       </div>
 
       {/* Weather Today Component */}
-      <div className="w-full flex justify-center items-center my-4">
-        <WeatherToday
-          cloud={currentWeather?.cloud}
-          temperature={currentWeather?.temp_c}
-          weatherImage={currentWeather?.condition.icon}
-          weatherAlt={currentWeather?.condition.text}
-          city={location?.name}
-        />
-      </div>
+      {isSuccess && (
+        <div className="w-full flex justify-center items-center my-4">
+          <WeatherToday
+            cloud={currentWeather?.cloud}
+            temperature={currentWeather?.temp_c}
+            weatherImage={currentWeather?.condition.icon}
+            weatherAlt={currentWeather?.condition.text}
+            city={location?.name}
+          />
+        </div>
+      )}
 
       {/* Today's Forecast Card */}
       <div className="w-full flex justify-center items-center my-4">
         <Card title="Today's Forecast" className="w-full max-w-2xl text-center">
-          {isLoadingWeather ? (
-            <p className="text-gray-300">Loading...</p>
-          ) : paginatedHourlyTimes.length > 0 ? (
+          {paginatedHourlyTimes.length > 0 ? (
             <div className="grid grid-cols-6 gap-2">
               {paginatedHourlyTimes.map((weather, index) => (
                 <div
@@ -91,7 +90,9 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-300">No data available</p>
+            <p className="text-gray-300">
+              No data available. Please try to search again
+            </p>
           )}
         </Card>
       </div>
