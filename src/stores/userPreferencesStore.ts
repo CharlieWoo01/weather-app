@@ -12,7 +12,7 @@ const useUserPreferencesStore = create<UserPreferencesState>()(
   persist(
     (set) => ({
       unit: "Celsius",
-      decimal: "On",
+      decimal: "Off",
       setUnit: (value) =>
         set(() => ({
           unit: value ? "Celsius" : "Fahrenheit",
