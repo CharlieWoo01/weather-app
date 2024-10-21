@@ -1,4 +1,8 @@
+enum GeneralPath {
+  Index = "/weather-app/",
+}
+
 export enum WeatherPath {
-  Home = "/weather-app/",
-  Settings = "/settings"
+  Home = GeneralPath.Index,
+  Settings = `${GeneralPath.Index}/settings`,
 }
