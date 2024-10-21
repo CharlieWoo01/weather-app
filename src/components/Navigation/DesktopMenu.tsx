@@ -1,5 +1,6 @@
 import { FaCity, FaCloudSun, FaCog, FaHome } from "react-icons/fa";
 import { NavigationItem } from "./NavigationItem";
+import { WeatherPath } from "../../constants/routes";
 
 export function DesktopNavigation() {
   return (
@@ -7,19 +8,21 @@ export function DesktopNavigation() {
       <NavigationItem
         icon={<FaHome className="text-gray-400 text-3xl" />}
         label="Home"
+        link={WeatherPath.Home}
       />
       <div className="flex flex-col items-center space-y-6 mt-5">
-        <NavigationItem
+        {/* <NavigationItem
           icon={<FaCloudSun className="text-gray-400 text-3xl" />}
           label="Weather"
         />
         <NavigationItem
           icon={<FaCity className="text-gray-400 text-3xl" />}
           label="Favourites"
-        />
+        /> */}
         <NavigationItem
           icon={<FaCog className="text-gray-400 text-3xl" />}
           label="Settings"
+          link={WeatherPath.Settings}
         />
       </div>
     </div>
