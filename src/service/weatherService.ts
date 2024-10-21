@@ -19,7 +19,7 @@ export namespace WeatherService {
     localtime: string;
   }
 
-  interface Current {
+  export interface Current {
     last_updated_epoch: number;
     last_updated: string;
     temp_c: number;

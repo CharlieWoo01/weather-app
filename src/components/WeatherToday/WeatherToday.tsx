@@ -1,7 +1,7 @@
 interface WeatherTodayProps {
   city?: string;
   cloud?: number;
-  temperature?: number;
+  temperature?: string;
   weatherImage?: string;
   weatherAlt?: string;
 }
@@ -31,7 +31,7 @@ export default function WeatherToday({
             className="text-5xl text-white font-bold mt-8 md:mt-16"
             data-testid="weather-temperature"
           >
-            {temperature}°
+            {temperature}
           </p>
         </div>
         <div className="flex justify-center md:justify-end mt-8 md:mt-0">

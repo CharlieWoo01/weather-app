@@ -2,8 +2,15 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { usePostcodeWeather } from "../../hooks/useWeather";
 import { Card, Search, WeatherToday } from "../../components";
 import classNames from "classnames";
+import useUserPreferencesStore from "../../stores/userPreferencesStore";
+import {
+  getCurrentWeatherUnit,
+  getWeatherForecastUnit,
+} from "../utils/getWeatherUnit";
 
 export default function Home() {
+  const { unit, decimal } = useUserPreferencesStore();
+
   const [city, setCity] = useState("London");
   const [searchTerm, setSearchTerm] = useState("London");
 
@@ -51,7 +58,7 @@ export default function Home() {
         <div className="w-full flex justify-center items-center my-4">
           <WeatherToday
             cloud={currentWeather?.cloud}
-            temperature={currentWeather?.temp_c}
+            temperature={getCurrentWeatherUnit(unit, currentWeather)}
             weatherImage={currentWeather?.condition.icon}
             weatherAlt={currentWeather?.condition.text}
             city={location?.name}
@@ -84,7 +91,7 @@ export default function Home() {
                     className="text-xl text-gray-300 mt-2"
                     data-testid={`forecast-temperature-${index}`}
                   >
-                    {weather.temp_c}°
+                    {getWeatherForecastUnit(unit, weather)}
                   </p>
                 </div>
               ))}
