@@ -1,19 +1,59 @@
 import { WeatherService } from "../../service/weatherService";
 
+/**
+ * Formats the temperature based on the unit and decimal settings for weather forecast.
+ *
+ * @param unit - The temperature unit, either "Celsius" or "Fahrenheit".
+ * @param decimal - A string value, either "On" or "Off".
+ * @param hour - The weather data containing temperature values for the forecast.
+ * @returns The formatted temperature string.
+ */
 export function getWeatherForecastUnit(
   unit: string,
+  decimal: string,
   hour: WeatherService.Hour
 ) {
-  return unit === "Celsius" ? `${hour.temp_c} °C` : `${hour.temp_f} °F`;
+  const formatNumberBasedOnDecimal = (
+    value: number,
+    decimalSetting: string
+  ): string => {
+    return decimalSetting === "Off"
+      ? Math.round(value).toString()
+      : value.toFixed(1);
+  };
+
+  return unit === "Celsius"
+    ? `${formatNumberBasedOnDecimal(hour.temp_c, decimal)} °C`
+    : `${formatNumberBasedOnDecimal(hour.temp_f, decimal)} °F`;
 }
 
+/**
+ * Formats the temperature based on the unit and decimal settings for current weather.
+ *
+ * @param unit - The temperature unit, either "Celsius" or "Fahrenheit".
+ * @param decimal - A string value, either "On" or "Off".
+ * @param hour - The weather data containing temperature values for the current weather.
+ * @returns The formatted temperature string, or the original value if no weather data is provided.
+ */
 export function getCurrentWeatherUnit(
   unit: string,
+  decimal: string,
   hour?: WeatherService.Current
 ) {
+  const formatNumberBasedOnDecimal = (
+    value: number,
+    decimalSetting: string
+  ): string => {
+    return decimalSetting === "Off"
+      ? Math.round(value).toString()
+      : value.toFixed(1);
+  };
+
   if (!hour) {
     return hour;
   }
 
-  return unit === "Celsius" ? `${hour.temp_c} °C` : `${hour.temp_f} °F`;
+  return unit === "Celsius"
+    ? `${formatNumberBasedOnDecimal(hour.temp_c, decimal)} °C`
+    : `${formatNumberBasedOnDecimal(hour.temp_f, decimal)} °F`;
 }

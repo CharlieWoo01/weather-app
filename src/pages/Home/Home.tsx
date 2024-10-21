@@ -58,7 +58,7 @@ export default function Home() {
         <div className="w-full flex justify-center items-center my-4">
           <WeatherToday
             cloud={currentWeather?.cloud}
-            temperature={getCurrentWeatherUnit(unit, currentWeather)}
+            temperature={getCurrentWeatherUnit(unit, decimal, currentWeather)}
             weatherImage={currentWeather?.condition.icon}
             weatherAlt={currentWeather?.condition.text}
             city={location?.name}
@@ -91,7 +91,7 @@ export default function Home() {
                     className="text-xl text-gray-300 mt-2"
                     data-testid={`forecast-temperature-${index}`}
                   >
-                    {getWeatherForecastUnit(unit, weather)}
+                    {getWeatherForecastUnit(unit, decimal, weather)}
                   </p>
                 </div>
               ))}
