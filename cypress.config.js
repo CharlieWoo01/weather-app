@@ -6,7 +6,7 @@ export default defineConfig({
     setupNodeEvents(on) {
       on("file:preprocessor", vitePreprocessor());
     },
-    baseUrl: "http://localhost:5173/weather-app/",
+    baseUrl: "http://localhost:5174/weather-app/",
     specPattern: "cypress/e2e/**/*.cy.{js,ts}",
   },
 });
