@@ -1,5 +1,5 @@
-import { Decimal, Unit } from "../../constants/settings";
-import { WeatherService } from "../../service/weatherService";
+import { Decimal, Unit } from "../constants/settings";
+import { WeatherService } from "../service/weatherService";
 
 /**
  * Formats the temperature based on the unit and decimal settings for weather forecast.

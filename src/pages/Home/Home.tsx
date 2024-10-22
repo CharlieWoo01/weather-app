@@ -6,7 +6,7 @@ import useUserPreferencesStore from "../../stores/userPreferencesStore";
 import {
   getCurrentWeatherUnit,
   getWeatherForecastUnit,
-} from "../utils/getWeatherUnit";
+} from "../../utils/getWeatherUnit";
 
 export default function Home() {
   const { unit, decimal } = useUserPreferencesStore();
