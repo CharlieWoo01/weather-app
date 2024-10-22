@@ -1,6 +1,7 @@
+// This file is for mocking so we do not care about the exact values as such
 export const forecastData = {
   location: {
-    name: "New York",
+    name: "London",
     region: "New York",
     country: "United States of America",
     lat: 40.71,
@@ -1069,5 +1070,14 @@ export const forecastData = {
         instruction: "",
       },
     ],
+  },
+};
+
+// For sake of mocking use same values but different name
+export const newYorkForecast = {
+  ...forecastData,
+  location: {
+    ...forecastData.location,
+    name: "New York",
   },
 };
