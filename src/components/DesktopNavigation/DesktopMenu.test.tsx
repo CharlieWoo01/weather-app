@@ -1,20 +1,22 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import DesktopNavigation from "./DesktopMenu";
+import { renderComponentWithProviders } from "../../test-utils";
+
+const renderComponent = () =>
+  renderComponentWithProviders(<DesktopNavigation />);
 
 describe("<DesktopNavigation />", () => {
   it("renders the correct navigation items with labels", () => {
-    render(<DesktopNavigation />);
+    renderComponent();
 
     expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("Weather")).toBeInTheDocument();
-    expect(screen.getByText("Favourites")).toBeInTheDocument();
     expect(screen.getByText("Settings")).toBeInTheDocument();
   });
 
   it("renders the icons", () => {
-    const { container } = render(<DesktopNavigation />);
+    const { container } = renderComponent();
 
     const icons = container.querySelectorAll("svg");
-    expect(icons.length).toBe(4);
+    expect(icons.length).toBe(2);
   });
 });

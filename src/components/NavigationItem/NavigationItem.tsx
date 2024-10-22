@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-interface NavigationItemProps {
+export interface NavigationItemProps {
   icon: JSX.Element;
   label: string;
   link: string;
