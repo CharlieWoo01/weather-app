@@ -6,7 +6,11 @@ interface NavigationItemProps {
   link: string;
 }
 
-export function NavigationItem({ icon, label, link }: NavigationItemProps) {
+export default function NavigationItem({
+  icon,
+  label,
+  link,
+}: NavigationItemProps) {
   return (
     <div>
       <Link to={link} className="flex flex-col items-center space-y-1">

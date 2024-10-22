@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { MobileNavigation } from "./MobileNavigation";
+import DesktopNavigation from "./DesktopMenu";
 
-describe("<MobileNavigation />", () => {
+describe("<DesktopNavigation />", () => {
   it("renders the correct navigation items with labels", () => {
-    render(<MobileNavigation />);
+    render(<DesktopNavigation />);
 
     expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("Weather")).toBeInTheDocument();
@@ -12,7 +12,7 @@ describe("<MobileNavigation />", () => {
   });
 
   it("renders the icons", () => {
-    const { container } = render(<MobileNavigation />);
+    const { container } = render(<DesktopNavigation />);
 
     const icons = container.querySelectorAll("svg");
     expect(icons.length).toBe(4);

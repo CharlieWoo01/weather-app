@@ -1,7 +1,5 @@
 import { ReactNode } from "react";
-import { DesktopNavigation } from "../../components/Navigation/DesktopMenu";
-import { MobileNavigation } from "../../components/Navigation/MobileNavigation";
-import { Spinner } from "../../components";
+import { DesktopNavigation, MobileNavigation, Spinner } from "../../components";
 import { useIsFetching } from "@tanstack/react-query";
 
 interface AppWrapperProps {

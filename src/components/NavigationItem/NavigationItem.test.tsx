@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { NavigationItem } from "./NavigationItem";
 import { FaHome } from "react-icons/fa";
+import NavigationItem from "./NavigationItem";
 
 describe("<NavigationItem />", () => {
   it("renders the icon and label correctly", () => {
