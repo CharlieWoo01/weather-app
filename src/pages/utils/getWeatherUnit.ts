@@ -1,3 +1,4 @@
+import { Decimal, Unit } from "../../constants/settings";
 import { WeatherService } from "../../service/weatherService";
 
 /**
@@ -17,12 +18,12 @@ export function getWeatherForecastUnit(
     value: number,
     decimalSetting: string
   ): string => {
-    return decimalSetting === "Off"
+    return decimalSetting === Decimal.Off
       ? Math.round(value).toString()
       : value.toFixed(1);
   };
 
-  return unit === "Celsius"
+  return unit === Unit.Celsius
     ? `${formatNumberBasedOnDecimal(hour.temp_c, decimal)} °C`
     : `${formatNumberBasedOnDecimal(hour.temp_f, decimal)} °F`;
 }
@@ -53,7 +54,7 @@ export function getCurrentWeatherUnit(
     return hour;
   }
 
-  return unit === "Celsius"
+  return unit === Unit.Celsius
     ? `${formatNumberBasedOnDecimal(hour.temp_c, decimal)} °C`
     : `${formatNumberBasedOnDecimal(hour.temp_f, decimal)} °F`;
 }

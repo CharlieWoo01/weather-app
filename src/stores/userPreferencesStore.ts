@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { Decimal, Unit } from "../constants/settings";
 
 interface UserPreferencesState {
   unit: string;
@@ -11,15 +12,15 @@ interface UserPreferencesState {
 const useUserPreferencesStore = create<UserPreferencesState>()(
   persist(
     (set) => ({
-      unit: "Celsius",
-      decimal: "Off",
+      unit: Unit.Celsius,
+      decimal: Decimal.Off,
       setUnit: (value) =>
         set(() => ({
-          unit: value ? "Celsius" : "Fahrenheit",
+          unit: value ? Unit.Celsius : Unit.Fahrenheit,
         })),
       setDecimal: (value) =>
         set(() => ({
-          decimal: value ? "On" : "Off",
+          decimal: value ? Decimal.On : Decimal.Off,
         })),
     }),
     {

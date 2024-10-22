@@ -1,4 +1,5 @@
 import { Card, RadioGroup } from "../../components";
+import { Decimal, Unit } from "../../constants/settings";
 import useUserPreferencesStore from "../../stores/userPreferencesStore";
 
 export default function Settings() {
@@ -22,10 +23,10 @@ export default function Settings() {
             <div className="flex flex-col items-center">
               <RadioGroup
                 options={[
-                  { labelLeft: "Fahrenheit", labelRight: "Celsius" },
-                  { labelLeft: "Off", labelRight: "On" },
+                  { labelLeft: Unit.Fahrenheit, labelRight: Unit.Celsius },
+                  { labelLeft: Decimal.Off, labelRight: Decimal.On },
                 ]}
-                values={[unit === "Celsius", decimal === "On"]}
+                values={[unit === Unit.Celsius, decimal === Decimal.On]}
                 onChange={handleRadioChange}
               />
               <p className="mt-4">{settingsText}</p>
