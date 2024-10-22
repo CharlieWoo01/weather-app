@@ -7,3 +7,4 @@ export { default as RadioGroup } from "./RadioGroup";
 export { default as NavigationItem } from "./NavigationItem";
 export { default as DesktopNavigation } from "./DesktopNavigation";
 export { default as MobileNavigation } from "./MobileNavigation";
+export { default as WeatherForecast } from "./WeatherForecast";

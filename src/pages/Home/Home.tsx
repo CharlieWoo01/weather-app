@@ -1,12 +1,9 @@
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { usePostcodeWeather } from "../../hooks/useWeather";
-import { Card, Search, WeatherToday } from "../../components";
-import classNames from "classnames";
+import { Search, WeatherForecast, WeatherToday } from "../../components";
 import useUserPreferencesStore from "../../stores/userPreferencesStore";
-import {
-  getCurrentWeatherUnit,
-  getWeatherForecastUnit,
-} from "../../utils/getWeatherUnit";
+import { getCurrentWeatherUnit } from "../../utils/getWeatherUnit";
+import { paginateWeatherData } from "../../utils/paginateWeatherData";
 
 export default function Home() {
   const { unit, decimal } = useUserPreferencesStore();
@@ -28,14 +25,6 @@ export default function Home() {
       setSearchTerm(city);
     }
   };
-
-  // Ensure that data exists before attempting to extract hourly times
-  const hourlyTimes = weatherData?.forecast?.forecastday?.[0]?.hour ?? [];
-
-  const page = 1;
-  const pageSize = 6;
-  const startIndex = (page - 1) * pageSize;
-  const paginatedHourlyTimes = hourlyTimes.slice(startIndex, pageSize);
 
   const currentWeather = weatherData?.current;
   const location = weatherData?.location;
@@ -68,40 +57,11 @@ export default function Home() {
 
       {/* Today's Forecast Card */}
       <div className="w-full flex justify-center items-center my-4">
-        <Card title="Today's Forecast" className="w-full max-w-2xl text-center">
-          {paginatedHourlyTimes.length > 0 ? (
-            <div className="grid grid-cols-6 gap-2">
-              {paginatedHourlyTimes.map((weather, index) => (
-                <div
-                  key={index}
-                  className={classNames("flex flex-col items-center pr-4", {
-                    "border-r-2 border-gray-700":
-                      index !== paginatedHourlyTimes.length - 1,
-                  })}
-                  data-testid={`forecast-item-${index}`}
-                >
-                  <p data-testid={`forecast-time-${index}`}>{weather.time}</p>
-                  <img
-                    src={weather.condition.icon}
-                    alt={`${weather.condition.text} icon`}
-                    className="w-16 h-16"
-                    data-testid={`forecast-icon-${index}`}
-                  />
-                  <p
-                    className="text-xl text-gray-300 mt-2"
-                    data-testid={`forecast-temperature-${index}`}
-                  >
-                    {getWeatherForecastUnit(unit, decimal, weather)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-300">
-              No data available. Please try to search again
-            </p>
-          )}
-        </Card>
+        <WeatherForecast
+          paginatedHourlyTimes={paginateWeatherData(1, 6, weatherData)}
+          unit={unit}
+          decimal={decimal}
+        />
       </div>
     </div>
   );
