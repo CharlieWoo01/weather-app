@@ -23,6 +23,8 @@ export default defineConfig({
         "src/**/*.d.ts",
         "**/index.ts",
         "src/main.tsx",
+        "cypress",
+        "cypress.config.js"
       ],
     },
   },
