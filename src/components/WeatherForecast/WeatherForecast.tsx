@@ -17,14 +17,17 @@ export default function WeatherForecast({
   return (
     <Card title="Todays Forecast" className="w-full max-w-2xl text-center">
       {paginatedHourlyTimes.length > 0 ? (
-        <div className="grid grid-cols-6 gap-2">
+        <div className="flex overflow-x-auto lg:overflow-x-hidden scrollbar-hide justify-start">
           {paginatedHourlyTimes.map((weather, index) => (
             <div
               key={index}
-              className={classNames("flex flex-col items-center pr-4", {
-                "border-r-2 border-gray-700":
-                  index !== paginatedHourlyTimes.length - 1,
-              })}
+              className={classNames(
+                "flex-shrink-0 flex flex-col items-center justify-center px-4 min-w-[96px]",
+                {
+                  "border-r-2 border-gray-700":
+                    index !== paginatedHourlyTimes.length - 1,
+                }
+              )}
               data-testid={`forecast-item-${index}`}
             >
               <p data-testid={`forecast-time-${index}`}>{weather.time}</p>
